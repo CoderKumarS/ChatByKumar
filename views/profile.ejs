@@ -37,6 +37,13 @@
         </form>
     </div>
     <script src="/socket.io/socket.io.js"></script>
+   <script>
+  // Get the ul element
+  var ul = document.getElementById('messages');
+
+  // Scroll to the bottom of the ul element
+  ul.scrollTop = ul.scrollHeight;
+</script>
     <script>
         const socket = io();
 
