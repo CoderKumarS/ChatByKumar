@@ -38,13 +38,8 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
    <script>
-  // Get the ul element
-  var ul = document.getElementById('messages');
-
-  // Scroll to the bottom of the ul element
-  ul.scrollTop = ul.scrollHeight;
-</script>
-    <script>
+        var ul = document.getElementById('messages');
+        ul.scrollTop = ul.scrollHeight;
         const socket = io();
 
         // Function to format the time (HH:MM:SS)
@@ -58,6 +53,7 @@
             const li = document.createElement('li');
             li.textContent = `${message.username}: ${message.message} - ${formatTime(new Date(message.timestamp))}`;
             messages.appendChild(li);
+            messages.scrollTop = messages.scrollHeight;
         });
 
         // Submit form data
