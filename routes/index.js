@@ -7,7 +7,7 @@ const localStrategy = require('passport-local');
 passport.use(new localStrategy(userModel.authenticate()));
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'ChatKumar' });
 });
 router.get('/login', function (req, res, next) {
   res.render('login');
