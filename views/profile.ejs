@@ -31,9 +31,9 @@
             <li><%= mess.sender.username %> : <%= mess.messageText %></li>
             <% }); %>
         </ul>
-        <!-- <ul id="messages" class="messages"></ul> -->
         <form id="form" action="" class="message-form">
-            <input id="input" autocomplete="off" /><button type="submit">Send</button>
+            <input id="input" autocomplete="off" placeholder="Enter message to send"/>
+            <button type="submit">Send</button>
         </form>
     </div>
     <script src="/socket.io/socket.io.js"></script>

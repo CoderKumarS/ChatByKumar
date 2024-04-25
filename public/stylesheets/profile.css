@@ -1,8 +1,13 @@
 /* public/stylesheets/style.css */
-
+html{
+  height: 95%;
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .container {
@@ -30,8 +35,12 @@ ul {
     overflow-y: scroll;
 }
 
+ul li:nth-child(odd) {
+    background: #dfdfdf;
+}
 li {
-    margin-bottom: 5px;
+    padding: 5px 0px 5px 15px;
+    border-radius: 5px;
 }
 
 .message-form {
