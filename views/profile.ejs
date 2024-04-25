@@ -1,0 +1,72 @@
+<!-- views/profile.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <style>
+        #username {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Welcome, <%= user.fullname %> <a href="/logout">Logout</a>
+        </h2>
+        <p id="username"><%= user.username%></p>
+        <p>Username: <%= user.username %>
+        </p>
+        <p>Email: <%= user.email %>
+        </p>
+
+        <h3>Messages:</h3>
+        <ul class="messages" id="messages" >
+            <% message.forEach(mess=> { %>
+            <li><%= mess.sender.username %> : <%= mess.messageText %></li>
+            <% }); %>
+        </ul>
+        <!-- <ul id="messages" class="messages"></ul> -->
+        <form id="form" action="" class="message-form">
+            <input id="input" autocomplete="off" /><button type="submit">Send</button>
+        </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Function to format the time (HH:MM:SS)
+        const formatTime = (date) => {
+            return date.toLocaleTimeString('en-US', { hour12: false });
+        };
+
+        // Listen for chatMessage events and display messages
+        socket.on('chatMessage', (message) => {
+            const messages = document.getElementById('messages');
+            const li = document.createElement('li');
+            li.textContent = `${message.username}: ${message.message} - ${formatTime(new Date(message.timestamp))}`;
+            messages.appendChild(li);
+        });
+
+        // Submit form data
+        const form = document.getElementById('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('input');
+            const message = input.value.trim();
+            if (message !== '') {
+                // For simplicity, assume a default username for now
+                const username = document.getElementById("username").textContent;
+                socket.emit('chatMessage', { username, message });
+                input.value = '';
+            }
+        });
+    </script>
+</body>
+
+</html>
